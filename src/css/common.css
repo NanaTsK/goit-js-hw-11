@@ -47,13 +47,13 @@ p:last-child {
   margin-bottom: 0;
 }
 
-ul,
+/* ul,
 ol,
 li,
 button {
   padding: 0;
   background-color: transparent;
-}
+} */
 
 input,
 button,
@@ -72,12 +72,6 @@ a {
   text-decoration: none;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-}
-
 img {
   display: block;
   max-width: 100%;
@@ -94,6 +88,24 @@ video {
   opacity: 0;
   visibility: hidden;
 }
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+  /* margin-right: 2px;
+  margin-left: 2px; */
+}
+input {
+  padding: 8px;
+  font: inherit;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+/* button:disabled {
+  pointer-events: none;
+} */
 
 /* ==================================================== */
 /* 

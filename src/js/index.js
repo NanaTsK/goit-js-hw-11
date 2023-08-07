@@ -1,14 +1,55 @@
-// import { } from "./pixabay-api";
+export { PixaBayAPI } from "./pixabay-api";
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
-// import SimpleLightbox from "simplelightbox";
-// import "simplelightbox/dist/simple-lightbox.min.css";
-// import { galleryItems } from './gallery-items';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+// import { Loading } from 'notiflix/build/notiflix-loading-aio';
+// Loading.circle('Loading data, please wait...');
+
+// Notify.success(`Hooray! We found ${data.totalHits} images.`);
+// Notify.info("We're sorry, but you've reached the end of search results.");
+// Notify.warning("Sorry, there are no images matching your search query. Please try again.");
+
+  gallery = new SimpleLightbox('.gallery-link', {
+                captionsData: 'alt',
+                captionDelay: 250,
+  });
 
 
-//   gallery = new SimpleLightbox('.gallery-link', {
-//                 captionsData: 'alt',
-//                 captionDelay: 250,
-//   });
+
+function createMarkup(data) { 
+    return data
+        .map(({ 
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads
+            }) => `
+            <div class="photo-card">
+              <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+              <div class="info">
+                <p class="info-item">
+                   <b>Likes: ${likes}</b>
+                </p>
+                <p class="info-item">
+                <b>Views: ${views}</b>
+                </p>
+                <p class="info-item">
+                   <b>Comments: ${comments}</b>
+                </p>
+                <p class="info-item">
+                   <b>Downloads: ${downloads}</b>
+                </p>
+              </div>
+            </div>
+            `)
+        .join("");
+}
+
             
 //* =====================================
 
@@ -24,7 +65,6 @@
 
 // breedList.addEventListener('change', handlerSelect);
 
-// Loading.circle('Loading data, please wait...');
 
 // fetchBreeds()
 //     .then(data => {
@@ -65,6 +105,10 @@
 //     `;
 // }
 
+
+
+
+//* TO BE USED FOR ERROR ###    
 // function handlerSelect(elem) {
 //     Loading.circle('Loading data, please wait...');
 //     CatInfo.innerHTML = '';

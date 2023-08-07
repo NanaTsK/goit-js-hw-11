@@ -1,32 +1,51 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const response = await axios.get()
+class PixaBayAPI { 
+    #BASE_URL = "https://pixabay.com/api/";
+    #API_KEY = "38687572-8bc90b5796d20c3c60f436eda";
 
-// axios.get('/users')
-//   .then(res => {
-//     console.log(res.data);
-//   });
+    q = null;
+    page = 1;
 
+    async fetchImages() { 
+        const searchParams = new URLSearchParams({
+            key: this.#API_KEY,
+            q: this.searchQuery,
+            image_type: "photo",
+            orientation: "horizontal",
+            safesearch: "true",
+            page: this.page,
+            per_page: 40,
+        });
 
-//* =====================================
+        const data = await axios.get(`${this.#BASE_URL}?${searchParams}`);
+        return data;
+    }
 
+    //* TO BE ADDED
+    // changePage() { 
+    //     this.page += 1;
+    // }
 
-// import axios from "axios";
+    // resetPage() { 
+    //     this.page = 1;
+    // }
+}
 
-// const API_KEY = 'live_kSIRSSuXC66Asfm1UmGRFimLVxLxKgZLpH0ehQLig7yUCgW8RM2ZryaFPNo8SDAW';
-// axios.defaults.headers.common['x-api-key'] = API_KEY;
+export { PixaBayAPI };
+    
+    //* =====================================
 
-// const BASE_URL = 'https://api.thecatapi.com/v1';
+// У відповіді буде масив зображень, що задовольнили критерії параметрів запиту. 
+// Кожне зображення описується об'єктом, з якого тобі цікаві тільки наступні властивості:
 
-// function fetchBreeds() { 
-//     return axios.get(`${BASE_URL}/breeds`)
-// };
-
-// function fetchCatByBreed(breedId) { 
-//     return axios.get(`${BASE_URL}/images/search?breed_ids=${breedId}`)
-// }
-
-// export { fetchBreeds, fetchCatByBreed };
+//     webformatURL - посилання на маленьке зображення для списку карток.
+//     largeImageURL - посилання на велике зображення.
+//     tags - рядок з описом зображення. Підійде для атрибуту alt.
+//     likes - кількість лайків.
+//     views - кількість переглядів.
+//     comments - кількість коментарів.
+//     downloads - кількість завантажень.
 
 
 
