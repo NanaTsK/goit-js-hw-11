@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -12,10 +14,88 @@ body {
   line-height: 1.5;
 }
 
+/* body {
+    font-family: 'Epilogue', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.29;
+    letter-spacing: -0.02em;
+
+    color: #141414;
+    background-color: #fbfbfb;
+} */
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul,
+ol,
+li,
+button {
+  padding: 0;
+  background-color: transparent;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 .is-hidden {
   opacity: 0;
   visibility: hidden;
 }
+
+/* ==================================================== */
 /* 
 .breed-select {
   margin-top: 60px;

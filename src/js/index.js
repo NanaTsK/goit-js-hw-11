@@ -1,3 +1,17 @@
+// import { } from "./pixabay-api";
+
+// import SimpleLightbox from "simplelightbox";
+// import "simplelightbox/dist/simple-lightbox.min.css";
+// import { galleryItems } from './gallery-items';
+
+
+//   gallery = new SimpleLightbox('.gallery-link', {
+//                 captionsData: 'alt',
+//                 captionDelay: 250,
+//   });
+            
+//* =====================================
+
 // import { fetchBreeds, fetchCatByBreed } from "./cat-api";
 // import { Report } from 'notiflix/build/notiflix-report-aio';
 // import { Loading } from 'notiflix/build/notiflix-loading-aio';
