@@ -2,15 +2,16 @@ import axios from "axios";
 
 class PixaBayAPI { 
     #BASE_URL = "https://pixabay.com/api/";
-    #API_KEY = "38687572-8bc90b5796d20c3c60f436eda";
+    // #API_KEY = "38687572-8bc90b5796d20c3c60f436eda";
 
     q = null;
     page = 1;
 
     async fetchImages() { 
         const searchParams = new URLSearchParams({
-            key: this.#API_KEY,
-            q: this.searchQuery,
+            key: '38641927-f84485d6b228f5ae40ab4372b',
+            // key: this.#API_KEY,
+            q: this.q,
             image_type: "photo",
             orientation: "horizontal",
             safesearch: "true",
@@ -18,18 +19,23 @@ class PixaBayAPI {
             per_page: 40,
         });
 
-        const data = await axios.get(`${this.#BASE_URL}?${searchParams}`);
+        const apiUrl = `${this.#BASE_URL}?${searchParams}`;
+    console.log("API URL:", apiUrl); // Add this line
+
+    const data = await axios.get(apiUrl);
         return data;
+        
+        // const data = await axios.get(`${this.#BASE_URL}?${searchParams}`);
+        // return data;
     }
 
-    //* TO BE ADDED
-    // changePage() { 
-    //     this.page += 1;
-    // }
+    changePage() { 
+        this.page += 1;
+    }
 
-    // resetPage() { 
-    //     this.page = 1;
-    // }
+    resetPage() { 
+        this.page = 1;
+    }
 }
 
 export { PixaBayAPI };
