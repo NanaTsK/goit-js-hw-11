@@ -36,6 +36,14 @@ class PixaBayAPI {
     resetPage() { 
         this.page = 1;
     }
+
+    // setTotal(total) {
+    //     this.#totalPages = total;
+    // }
+
+    // hasMorePhotos() {
+    //     return this.#page < Math.ceil(this.#totalPages / this.#per_page);
+    // }
 }
 
 export { PixaBayAPI };
