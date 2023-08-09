@@ -8,24 +8,21 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // Loading.circle('Loading data, please wait...');
 
 // Notify.success(`Hooray! We found ${data.totalHits} images.`);
-// Notify.info("We're sorry, but you've reached the end of search results.");
+// Notify.info("Hey, you've reached the end of search results.");
 // Notify.warning("Sorry, there are no images matching your search query. Please try again.");
 
-// export const notifyInit = {
-//   width: '250px',
-//   position: 'right-bottom',
-//   distance: '20px',
-//   timeout: 1500,
-//   opacity: 0.8,
-//   fontSize: '16px',
-//   borderRadius: '50px',
-// };
 
-// } else
-//           Notify.info(
-//             "We're sorry, but you've reached the end of search results.",
-//             notifyInit
-//           );
+const notifyInit = Notify.init({
+  width: '280px',
+  position: 'right-bottom',
+  distance: '20px',
+  timeout: 2000,
+  opacity: 0.8,
+  fontSize: '20px',
+  borderRadius: '50px 10px',
+  pauseOnHover: true,
+});
+
 
 const gallery = document.querySelector(".gallery");
 const searchForm = document.querySelector(".search-form");
@@ -37,12 +34,6 @@ const simplelightbox = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
 });
 console.log("SimpleLightbox initialized"); 
-
-// const gallery = new SimpleLightbox('.gallery-link', {
-                // captionsData: 'alt',
-                // captionDelay: 250,
-//   });
-
 
 searchForm.addEventListener("submit", handlerSearchForm);
 
@@ -58,11 +49,17 @@ function handlerSearchForm(evt) {
 async function searchPhotos() {
 
     try {
+        
         const response = await PixaBayAPIInstance.fetchImages();
-        console.log("API Response:", response.data); // Add this line        
+        console.log("API Response:", response.data);      
         const images = response.data.hits;
         const markup = createMarkup(images);
         gallery.insertAdjacentHTML("beforeend", markup);
+
+        if (images.length < 1) {
+            Notify.warning("Sorry, there are no images matching your search query. Please try again.", notifyInit);
+        } else { Notify.success(`Hooray! We found ${response.data.totalHits} images.`), notifyInit }
+
 
         simplelightbox.refresh();
 
@@ -79,47 +76,24 @@ async function searchMorePhotos() {
         const markup = createMarkup(images);
         gallery.insertAdjacentHTML("beforeend", markup);
 
+        
+        // if ( PixaBayAPIInstance.page * 40 >= response.data.totalHits ) { 
+        //     Notify.info("Hey, you've reached the end of search results"), notifyInit
+        //     // return;
+        // }
+        if (!observer.isIntersecting) {
+            if (PixaBayAPIInstance.page * 40 >= response.data.totalHits) { 
+                Notify.info("Hey, you've reached the end of search results");
+            }
+        }
+      
+        
         simplelightbox.refresh();
 
     } catch (error) { 
     console.error("Error fetching images:", error);
 }
 }
-
-
-// function createMarkup(data) { 
-//     return data
-//         .map(({ 
-//         webformatURL,
-//         largeImageURL,
-//         tags,
-//         likes,
-//         views,
-//         comments,
-//         downloads
-//             }) => `
-//            <a class="gallery__link" href="${largeImageURL}">
-//                 <div class="photo-card gallery__item">
-//               <img class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" width='320' height='200' />
-//               <div class="info">
-//                 <p class="info-item">
-//                    <b>Likes: ${likes}</b>
-//                 </p>
-//                 <p class="info-item">
-//                 <b>Views: ${views}</b>
-//                 </p>
-//                 <p class="info-item">
-//                    <b>Comments: ${comments}</b>
-//                 </p>
-//                 <p class="info-item">
-//                    <b>Downloads: ${downloads}</b>
-//                 </p>
-//               </div>
-//             </div>
-//             </a>
-//             `)
-//         .join("");
-// }
 
 function createMarkup(data) { 
     return data
@@ -167,9 +141,7 @@ function createMarkup(data) {
         .join("");
 }
 
-// <a href=${largeImageURL}><img src=${webformatURL} alt=${tags} loading="lazy" /></a>
 
-// <a href='${largeImageURL}' class="card-link js-card-link"></a>
 
 // Set up Intersection Observer for infinite scrolling
 

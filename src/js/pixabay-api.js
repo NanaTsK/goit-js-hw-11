@@ -2,15 +2,14 @@ import axios from "axios";
 
 class PixaBayAPI { 
     #BASE_URL = "https://pixabay.com/api/";
-    // #API_KEY = "38687572-8bc90b5796d20c3c60f436eda";
+    #API_KEY = "38687572-8bc90b5796d20c3c60f436eda";
 
     q = null;
     page = 1;
 
     async fetchImages() { 
         const searchParams = new URLSearchParams({
-            key: '38641927-f84485d6b228f5ae40ab4372b',
-            // key: this.#API_KEY,
+            key: this.#API_KEY,
             q: this.q,
             image_type: "photo",
             orientation: "horizontal",
@@ -20,13 +19,10 @@ class PixaBayAPI {
         });
 
         const apiUrl = `${this.#BASE_URL}?${searchParams}`;
-    console.log("API URL:", apiUrl); // Add this line
+    console.log("API URL:", apiUrl); 
 
     const data = await axios.get(apiUrl);
         return data;
-        
-        // const data = await axios.get(`${this.#BASE_URL}?${searchParams}`);
-        // return data;
     }
 
     changePage() { 
@@ -47,21 +43,5 @@ class PixaBayAPI {
 }
 
 export { PixaBayAPI };
-    
-    //* =====================================
-
-// У відповіді буде масив зображень, що задовольнили критерії параметрів запиту. 
-// Кожне зображення описується об'єктом, з якого тобі цікаві тільки наступні властивості:
-
-//     webformatURL - посилання на маленьке зображення для списку карток.
-//     largeImageURL - посилання на велике зображення.
-//     tags - рядок з описом зображення. Підійде для атрибуту alt.
-//     likes - кількість лайків.
-//     views - кількість переглядів.
-//     comments - кількість коментарів.
-//     downloads - кількість завантажень.
-
-
-
 
 
