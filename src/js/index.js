@@ -139,8 +139,8 @@ function createMarkup(data) {
       src="${webformatURL}"
       alt="${tags}"
       loading="lazy"
-      width="420"
-      height="300"
+      width="360"
+      height="260"
     />
   
   <div class="info">

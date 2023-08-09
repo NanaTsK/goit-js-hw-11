@@ -116,7 +116,7 @@ input {
   margin-right: auto;
   list-style: none;
   margin-top: 50px;
-  gap: 20px;
+  gap: 18px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -147,8 +147,8 @@ input {
   } */
 
 .photo-card {
-  height: 370px;
-  width: 420px;
+  width: 360px;
+  height: 330px;
   border-radius: 0 0 10px 10px;
   box-shadow: 0 10px 20px #dbdbdb;
   position: relative;
@@ -173,12 +173,12 @@ input {
   flex: 1;
 }
 .info-left {
-  padding-left: 28px;
+  padding-left: 24px;
 }
 
 .info-right {
   text-align: start;
-  padding-left: 28px;
+  padding-left: 8px;
 }
 
 /* input {
