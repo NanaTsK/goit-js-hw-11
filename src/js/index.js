@@ -35,10 +35,23 @@ const simplelightbox = new SimpleLightbox('.gallery a', {
 });
 console.log("SimpleLightbox initialized"); 
 
+const options = {
+  root: null,
+  rootMargin: "400px",
+  threshold: 1.0,
+};
+const observer = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    searchMorePhotos();
+  }
+}, options);
+
 searchForm.addEventListener("submit", handlerSearchForm);
 
 function handlerSearchForm(evt) { 
     evt.preventDefault();
+
+    observer.unobserve(target);
 
     gallery.innerHTML = "";
     const searchQuery = evt.currentTarget.elements["searchQuery"].value.trim();
@@ -60,7 +73,7 @@ async function searchPhotos() {
             Notify.warning("Sorry, there are no images matching your search query. Please try again.", notifyInit);
         } else { Notify.success(`Hooray! We found ${response.data.totalHits} images.`), notifyInit }
 
-
+        observer.observe(target);
         simplelightbox.refresh();
 
     } catch (error) { 
@@ -76,7 +89,9 @@ async function searchMorePhotos() {
         const markup = createMarkup(images);
         gallery.insertAdjacentHTML("beforeend", markup);
 
-        if  (PixaBayAPIInstance.page * 40 >= response.data.totalHits) { 
+        if (PixaBayAPIInstance.page * 40 >= response.data.totalHits) { 
+            observer.unobserve(target);
+
                 Notify.info("Hey, you've reached the end of search results"), notifyInit
             }
         simplelightbox.refresh();
@@ -136,18 +151,18 @@ function createMarkup(data) {
 
 // Set up Intersection Observer for infinite scrolling
 
-const options = {
-  root: null,
-  rootMargin: "400px",
-  threshold: 1.0,
-};
-const observer = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting) {
-    searchMorePhotos();
-  }
-}, options);
+// const options = {
+//   root: null,
+//   rootMargin: "400px",
+//   threshold: 1.0,
+// };
+// const observer = new IntersectionObserver(entries => {
+//   if (entries[0].isIntersecting) {
+//     searchMorePhotos();
+//   }
+// }, options);
 
-observer.observe(target);
+// observer.observe(target);
 
 // let observer = new IntersectionObserver(onLoad, options);
 // function onLoad(entries, observer) { 
