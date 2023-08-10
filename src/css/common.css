@@ -97,10 +97,46 @@ input {
   margin-right: 12px;
 }
 
+/* .search-form > input {
+    height: 36px;
+    width: 200px;
+    padding: 8px;
+    border: #141414 1px solid;
+    border-radius: 6px;
+} */
+
 .search-form {
   display: flex;
   justify-content: center;
   gap: 5px;
+}
+
+/* .btn-form {
+    margin-left: 40px;
+    margin-right: 100px;
+    padding: 10px 20px;
+    border: #141414 1px solid;
+    border-radius: 6px;
+    background-color: #ffdd00;
+    font-weight: 600;
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-form:is(:hover, :focus) {
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.5);
+} */
+
+/** =============================================== WRAPPER */
+
+.wrapper-form {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  padding: 20px 20px;
+  text-align: center;
+  background-color: rgba(38, 192, 211, 0.8);
+  /* border-bottom: #141414 1px solid; */
+  box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.5);
 }
 /** =============================================== GALLERY */
 
@@ -115,7 +151,7 @@ input {
   margin-left: auto;
   margin-right: auto;
   list-style: none;
-  margin-top: 50px;
+  margin-top: 110px;
   gap: 18px;
   display: flex;
   flex-wrap: wrap;
@@ -256,9 +292,16 @@ input {
 .btn-up.hidden:is(:hover, :focus) {
   /* background-color: #00bde7; */
 
-  background-color: rgb(38, 192, 211);
-  color: rgb(255, 255, 255);
+  background-color: rgba(38, 192, 211, 0.9);
+  color: rgba(255, 255, 255, 0.9);
 
+  /* box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.5); */
+  /* box-shadow: 0 6px 12px #dbdbdb; */
   box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.5);
+
   border: none;
 }
+
+/* .notiflix-notify:hover {
+  opacity: 1;
+} */
