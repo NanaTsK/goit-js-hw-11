@@ -21,6 +21,7 @@ const notifyInit = Notify.init({
   opacity: 0.8,
   fontSize: '20px',
   borderRadius: '50px 10px',
+  notiflixIconColor: 'rgba(0,0,0,0.6)',
   pauseOnHover: true,
 });
 
