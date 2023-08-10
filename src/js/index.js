@@ -4,8 +4,9 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-// import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 // Loading.circle('Loading data, please wait...');
+// .finally(Loading.remove());
 
 // Notify.success(`Hooray! We found ${data.totalHits} images.`);
 // Notify.info("Hey, you've reached the end of search results.");
@@ -56,15 +57,15 @@ function handlerSearchForm(evt) {
     gallery.innerHTML = "";
     const searchQuery = evt.currentTarget.elements["searchQuery"].value.trim();
         PixaBayAPIInstance.q = searchQuery;
-      searchPhotos();
+    searchPhotos();
 }
 
 async function searchPhotos() {
 
     try {
-        
+        Loading.circle();
         const response = await PixaBayAPIInstance.fetchImages();
-        console.log("API Response:", response.data);      
+        console.log("API Response:", response.data);
         const images = response.data.hits;
         const markup = createMarkup(images);
         gallery.insertAdjacentHTML("beforeend", markup);
@@ -78,14 +79,17 @@ async function searchPhotos() {
 
         searchForm.reset();
         simplelightbox.refresh();
+        Loading.remove();
 
-    } catch (error) { 
+    } catch (error) {
         console.error("Error fetching images:", error);
-}
+        
+    } finally {Loading.remove(); }
 }
 
 async function searchMorePhotos() {
     try { 
+        Loading.circle();
         PixaBayAPIInstance.changePage();
         const response = await PixaBayAPIInstance.fetchImages();
         const images = response.data.hits;
@@ -98,9 +102,11 @@ async function searchMorePhotos() {
                 Notify.info("Hey, you've reached the end of search results"), notifyInit
             }
         simplelightbox.refresh();
+        Loading.remove();
 
     } catch (error) { 
-    console.error("Error fetching images:", error);
+        console.error("Error fetching images:", error);
+        Loading.remove();
 }
 }
 
