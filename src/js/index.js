@@ -76,18 +76,9 @@ async function searchMorePhotos() {
         const markup = createMarkup(images);
         gallery.insertAdjacentHTML("beforeend", markup);
 
-        
-        // if ( PixaBayAPIInstance.page * 40 >= response.data.totalHits ) { 
-        //     Notify.info("Hey, you've reached the end of search results"), notifyInit
-        //     // return;
-        // }
-        if (!observer.isIntersecting) {
-            if (PixaBayAPIInstance.page * 40 >= response.data.totalHits) { 
-                Notify.info("Hey, you've reached the end of search results");
+        if  (PixaBayAPIInstance.page * 40 >= response.data.totalHits) { 
+                Notify.info("Hey, you've reached the end of search results"), notifyInit
             }
-        }
-      
-        
         simplelightbox.refresh();
 
     } catch (error) { 
