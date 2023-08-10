@@ -71,12 +71,12 @@ async function searchPhotos() {
 
         if (images.length < 1) {
             Notify.warning("Sorry, there are no images matching your search query. Please try again.", notifyInit);
+            return;
         } else { Notify.success(`Hooray! We found ${response.data.totalHits} images.`), notifyInit }
-        if (images.length < 1) {
-                observer.unobserve(target);
-            } else {
-                observer.observe(target);
-            }
+        
+        observer.observe(target);
+
+        searchForm.reset();
         simplelightbox.refresh();
 
     } catch (error) { 
