@@ -204,3 +204,61 @@ input {
     height: 40px;
     padding: 10px 16px;
 } */
+
+/** =============================================== BTN-UP */
+
+/* background: '#26c0d3',
+    textColor: '#fff',
+    childClassName: 'notiflix-notify-info',
+    notiflixIconColor: 'rgba(0,0,0,0.2)',
+    fontAwesomeClassName: 'fas fa-info-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(38,192,211,0.2)', */
+
+.btn-up {
+  /* font-size: 40px;
+  color: #ffdd00; */
+
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.8);
+
+  visibility: hidden;
+  /* opacity: 0.8; */
+
+  position: fixed;
+  z-index: 3;
+  bottom: 100px;
+  right: 20px;
+  transform: translateX(100px);
+
+  width: 120px;
+  height: 60px;
+
+  background-color: rgba(38, 192, 211, 0.8);
+  /* border-radius: 50%; */
+  border-radius: 50px 10px;
+  /* border: #141414 1px solid; */
+  border: transparent;
+
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hidden {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.btn-up.hidden:is(:hover, :focus) {
+  /* background-color: #00bde7; */
+
+  background-color: rgb(38, 192, 211);
+  color: rgb(255, 255, 255);
+
+  box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.5);
+  border: none;
+}

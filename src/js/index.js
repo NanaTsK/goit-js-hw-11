@@ -24,10 +24,21 @@ const notifyInit = Notify.init({
   pauseOnHover: true,
 });
 
+const notifyLoadInit = Loading.init({
+  // className: 'notiflix-loading',
+  // backgroundColor: 'rgba(0,0,0,0.8)',
+  // backgroundColor: 'rgba(238,238,238, 0.8)',
+  backgroundColor: 'transparent',
+  // svgSize: '80px',
+  // svgColor: '#32c682',
+  // messageColor: '#dcdcdc',
+});
+
 
 const gallery = document.querySelector(".gallery");
 const searchForm = document.querySelector(".search-form");
 const target = document.querySelector(".js-guard");
+const btnUp = document.querySelector(".btn-up");
 const PixaBayAPIInstance = new PixaBayAPI();
 
 const simplelightbox = new SimpleLightbox('.gallery a', {
@@ -47,6 +58,8 @@ const observer = new IntersectionObserver(entries => {
   }
 }, options);
 
+window.addEventListener("scroll", onScroll);
+btnUp.addEventListener("click", scrollToTop);
 searchForm.addEventListener("submit", handlerSearchForm);
 
 function handlerSearchForm(evt) { 
@@ -63,7 +76,7 @@ function handlerSearchForm(evt) {
 async function searchPhotos() {
 
     try {
-        Loading.circle();
+        Loading.circle(notifyLoadInit);
         const response = await PixaBayAPIInstance.fetchImages();
         console.log("API Response:", response.data);
         const images = response.data.hits;
@@ -89,7 +102,7 @@ async function searchPhotos() {
 
 async function searchMorePhotos() {
     try { 
-        Loading.circle();
+        // Loading.circle(notifyLoadInit);
         PixaBayAPIInstance.changePage();
         const response = await PixaBayAPIInstance.fetchImages();
         const images = response.data.hits;
@@ -99,14 +112,15 @@ async function searchMorePhotos() {
         if (PixaBayAPIInstance.page * 40 >= response.data.totalHits) { 
             observer.unobserve(target);
 
-                Notify.info("Hey, you've reached the end of search results"), notifyInit
+                // Notify.info("Hey, you've reached the end of search results"), notifyInit
+              Notify.info("Hey, that's all we've got for your search"), notifyInit
             }
         simplelightbox.refresh();
-        Loading.remove();
+        // Loading.remove();
 
     } catch (error) { 
         console.error("Error fetching images:", error);
-        Loading.remove();
+        // Loading.remove();
 }
 }
 
@@ -155,6 +169,17 @@ function createMarkup(data) {
             `)
         .join("");
 }
+
+function onScroll() { 
+  btnUp.classList.toggle('hidden', window.scrollY > 800);
+}
+function scrollToTop() { 
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+}
+
 
 //* =====================================
 
