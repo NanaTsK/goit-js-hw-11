@@ -3,21 +3,19 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
+// Notify.success(`Hooray! We found ${data.totalHits} images.`);
+// Notify.info("Hey, that's all we've got for your search.");
+// Notify.warning("Sorry, there are no images matching your search query. Please try again.");
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 // Loading.circle('Loading data, please wait...');
 // .finally(Loading.remove());
-
-// Notify.success(`Hooray! We found ${data.totalHits} images.`);
-// Notify.info("Hey, you've reached the end of search results.");
-// Notify.warning("Sorry, there are no images matching your search query. Please try again.");
 
 
 const notifyInit = Notify.init({
   width: '280px',
   position: 'right-bottom',
   distance: '20px',
-  timeout: 2600,
+  // timeout: 2600,
   opacity: 0.8,
   fontSize: '20px',
   borderRadius: '50px 10px',
@@ -26,13 +24,8 @@ const notifyInit = Notify.init({
 });
 
 const notifyLoadInit = Loading.init({
-  // className: 'notiflix-loading',
-  // backgroundColor: 'rgba(0,0,0,0.8)',
-  // backgroundColor: 'rgba(238,238,238, 0.8)',
   backgroundColor: 'transparent',
-  // svgSize: '80px',
-  // svgColor: '#32c682',
-  // messageColor: '#dcdcdc',
+  svgSize: '120px',
 });
 
 
@@ -94,7 +87,7 @@ async function searchPhotos() {
         observer.observe(target);
 
         searchForm.reset();
-        simplelightbox.refresh();
+      simplelightbox.refresh();
         Loading.remove();
 
     } catch (error) {
@@ -114,11 +107,10 @@ async function searchMorePhotos() {
 
         if (PixaBayAPIInstance.page * 40 >= response.data.totalHits) { 
             observer.unobserve(target);
-
-                // Notify.info("Hey, you've reached the end of search results"), notifyInit
               Notify.info("Hey, that's all we've got for your search"), notifyInit
             }
-        simplelightbox.refresh();
+      simplelightbox.refresh();
+      addSmoothScroll();
         // Loading.remove();
 
     } catch (error) { 
@@ -183,84 +175,34 @@ function scrollToTop() {
     });
 }
 
+function addSmoothScroll() { 
+const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+});
+}
+
 
 //* =====================================
+//* Notyfy FOR ERROR ###    
 
-
-// Set up Intersection Observer for infinite scrolling
-
-// const options = {
-//   root: null,
-//   rootMargin: "400px",
-//   threshold: 1.0,
-// };
-// const observer = new IntersectionObserver(entries => {
-//   if (entries[0].isIntersecting) {
-//     searchMorePhotos();
-//   }
-// }, options);
-
-// observer.observe(target);
-
-// let observer = new IntersectionObserver(onLoad, options);
-// function onLoad(entries, observer) { 
-
-//     entries.forEach((entry) => {
-//         if (entry.isIntersecting) { 
-//             currentPage += 1; 
-//             getTrending(currentPage)
-//                .then(data => { 
-//                    list.insertAdjacentHTML("beforeend", createMarkup(data.results))
-//                 //    if (data.page === data.total_pages) {    <=THIS IS NOT WORKING AS ONLY 500 PAGES ARE LOADING INSTEAD OF 1000
-//                    if (data.page === data.total_pages/2) { 
-//                        observer.unobserve(target);
-//                    }
-//     })
-//     .catch(err => console.log(err));
-//         }
-//     })
-// }
-
-// console.log(createMarkup(data));
-// console.log(createMarkup);
-
-//* =====================================
+ // .catch(error => {
+  //           Report.failure(
+  //               'Oops! Something went wrong!',
+  //               '🐾 Try reloading the page!',
+  //               'OK',
+  //               {
+  //               plainText: 'center',}
+  //           );
+  //       // Loading.remove();
+  //       })
 
 
 
 
 
 
-//* TO BE USED FOR ERROR ###    
-// function handlerSelect(elem) {
-//     Loading.circle('Loading data, please wait...');
-//     CatInfo.innerHTML = '';
-//     fetchCatByBreed(elem.target.value)
-//         .then(data => {
-//             createCard(...data.data);
-//             CatInfo.classList.remove('is-hidden');
-//         })
-//         .catch(error => {
-//             Report.failure(
-//                 'Oops! Something went wrong!',
-//                 '🐾 Try reloading the page!',
-//                 'OK',
-//                 {
-//           plainText: 'center',
-//         }
-//             );
-//         })
-//         .finally(Loading.remove());
-// }
-
-
-
-
-// const { height: cardHeight } = document
-//   .querySelector(".gallery")
-//   .firstElementChild.getBoundingClientRect();
-
-// window.scrollBy({
-//   top: cardHeight * 2,
-//   behavior: "smooth",
-// });
