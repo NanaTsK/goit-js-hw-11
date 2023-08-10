@@ -70,7 +70,8 @@ function handlerSearchForm(evt) {
     gallery.innerHTML = "";
     const searchQuery = evt.currentTarget.elements["searchQuery"].value.trim();
         PixaBayAPIInstance.q = searchQuery;
-    searchPhotos();
+  searchPhotos();
+  searchForm.reset(); //*
 }
 
 async function searchPhotos() {
@@ -85,7 +86,8 @@ async function searchPhotos() {
 
         if (images.length < 1) {
             Notify.warning("Sorry, there are no images matching your search query. Please try again.", notifyInit);
-            return;
+          searchForm.reset(); //*
+          return;
         } else { Notify.success(`Hooray! We found ${response.data.totalHits} images.`), notifyInit }
         
         observer.observe(target);
