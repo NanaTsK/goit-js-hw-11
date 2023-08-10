@@ -72,8 +72,11 @@ async function searchPhotos() {
         if (images.length < 1) {
             Notify.warning("Sorry, there are no images matching your search query. Please try again.", notifyInit);
         } else { Notify.success(`Hooray! We found ${response.data.totalHits} images.`), notifyInit }
-
-        observer.observe(target);
+        if (images.length < 1) {
+                observer.unobserve(target);
+            } else {
+                observer.observe(target);
+            }
         simplelightbox.refresh();
 
     } catch (error) { 
@@ -147,6 +150,7 @@ function createMarkup(data) {
         .join("");
 }
 
+//* =====================================
 
 
 // Set up Intersection Observer for infinite scrolling
