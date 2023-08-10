@@ -17,7 +17,7 @@ const notifyInit = Notify.init({
   width: '280px',
   position: 'right-bottom',
   distance: '20px',
-  timeout: 2000,
+  timeout: 2600,
   opacity: 0.8,
   fontSize: '20px',
   borderRadius: '50px 10px',
@@ -145,8 +145,8 @@ function createMarkup(data) {
       src="${webformatURL}"
       alt="${tags}"
       loading="lazy"
-      width="360"
-      height="260"
+      width="320"
+      height="220"
     />
   
   <div class="info">
@@ -253,3 +253,14 @@ function scrollToTop() {
 //         .finally(Loading.remove());
 // }
 
+
+
+
+// const { height: cardHeight } = document
+//   .querySelector(".gallery")
+//   .firstElementChild.getBoundingClientRect();
+
+// window.scrollBy({
+//   top: cardHeight * 2,
+//   behavior: "smooth",
+// });
