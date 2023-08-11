@@ -131,17 +131,16 @@ function createMarkup(data) {
         downloads
             }) => `
       <div class="photo-card gallery__item">
-            <button class="like-button button">
+            <button type="button" class="like-button button" >
               <svg  
-                class="like-icon"
+                class="like-icon" 
                 width="32"
                 height="32"
+                onclick="style.stroke='rgba(255, 0, 0, 0.8)'"
               >
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.667" d="M27.787 6.147a7.326 7.326 0 0 0-10.373 0L16.001 7.56l-1.413-1.413a7.333 7.333 0 0 0-10.374 0 7.333 7.333 0 0 0 0 10.374l11.787 11.787 11.787-11.787a7.345 7.345 0 0 0 2.15-5.187 7.33 7.33 0 0 0-2.15-5.187z"/>
               </svg>
             </button>
-
-
         <a class="gallery__link" href="${largeImageURL}"> 
         <img
             class="gallery__image"
@@ -198,16 +197,16 @@ window.scrollBy({
 }
 
 //* =====================================
+//* Like Button ... to be amended   
 
-const likeButton = document.querySelector('.like-button');
-
-likeButton.addEventListener('click', () => {
-  likeButton.classList.toggle('clicked');
-  // Perform additional actions, such as adding to a list of liked photos
-});
+// const likeButton = document.querySelector(".like-button");
+// likeButton.addEventListener("click", () => { 
+//   const likeIcon = likeButton.querySelector(".like-icon");
+//   likeIcon.classList.toggle("clicked")
+// })
 
 //* =====================================
-//* Notyfy FOR ERROR ###    
+//* Notyfy for Error ... if to be added    
 
  // .catch(error => {
   //           Report.failure(
