@@ -130,37 +130,48 @@ function createMarkup(data) {
         comments,
         downloads
             }) => `
-        <div class="photo-card gallery__item">
-            <a class="gallery__link" href="${largeImageURL}">
-    <img
-      class="gallery__image"
-      src="${webformatURL}"
-      alt="${tags}"
-      loading="lazy"
-      width="320"
-      height="220"
-    />
-  
-  <div class="info">
-    <div class="info-left">
-      <p class="info-item">
-        <b>Likes: ${likes}</b>
-      </p>
-      <p class="info-item">
-        <b>Views: ${views}</b>
-      </p>
-    </div>
-    <div class="info-right">
-      <p class="info-item">
-        <b>Comments: ${comments}</b>
-      </p>
-      <p class="info-item">
-        <b>Downloads: ${downloads}</b>
-      </p>
-    </div>
-  </div>
-  </a>
-</div>
+      <div class="photo-card gallery__item">
+            <button class="like-button button">
+              <svg  
+                class="like-icon"
+                width="32"
+                height="32"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.667" d="M27.787 6.147a7.326 7.326 0 0 0-10.373 0L16.001 7.56l-1.413-1.413a7.333 7.333 0 0 0-10.374 0 7.333 7.333 0 0 0 0 10.374l11.787 11.787 11.787-11.787a7.345 7.345 0 0 0 2.15-5.187 7.33 7.33 0 0 0-2.15-5.187z"/>
+              </svg>
+            </button>
+
+
+        <a class="gallery__link" href="${largeImageURL}"> 
+        <img
+            class="gallery__image"
+            src="${webformatURL}"
+            alt="${tags}"
+            loading="lazy"
+            width="320"
+            height="220"
+          />
+
+          <div class="info">
+            <div class="info-left">
+              <p class="info-item">
+                <b>Likes: ${likes}</b>
+              </p>
+              <p class="info-item">
+                <b>Views: ${views}</b>
+              </p>
+            </div>
+            <div class="info-right">
+              <p class="info-item">
+                <b>Comments: ${comments}</b>
+              </p>
+              <p class="info-item">
+                <b>Downloads: ${downloads}</b>
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
             `)
         .join("");
 }
@@ -186,6 +197,14 @@ window.scrollBy({
 });
 }
 
+//* =====================================
+
+const likeButton = document.querySelector('.like-button');
+
+likeButton.addEventListener('click', () => {
+  likeButton.classList.toggle('clicked');
+  // Perform additional actions, such as adding to a list of liked photos
+});
 
 //* =====================================
 //* Notyfy FOR ERROR ###    
@@ -201,8 +220,5 @@ window.scrollBy({
   //       // Loading.remove();
   //       })
 
-
-
-
-
+//* =====================================
 
