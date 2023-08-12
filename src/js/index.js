@@ -5,6 +5,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // Notify.success(`Hooray! We found ${data.totalHits} images.`);
 // Notify.info("Hey, that's all we've got for your search.");
+// Notify.info("Please, enter search request.");
 // Notify.warning("Sorry, there are no images matching your search query. Please try again.");
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 // Loading.circle('Loading data, please wait...');
@@ -63,7 +64,13 @@ function handlerSearchForm(evt) {
 
     gallery.innerHTML = "";
     const searchQuery = evt.currentTarget.elements["searchQuery"].value.trim();
-        PixaBayAPIInstance.q = searchQuery;
+  
+    if (searchQuery === "") {
+        Notify.info("Please, tell us what you are looking for.", notifyInit);
+        return; // Don't proceed with the search
+    }
+  
+  PixaBayAPIInstance.q = searchQuery;
   searchPhotos();
   searchForm.reset(); //*
 }
@@ -79,6 +86,10 @@ async function searchPhotos() {
         const markup = createMarkup(images);
         gallery.insertAdjacentHTML("beforeend", markup);
 
+        // if (searchQuery.value = "") { 
+        //     Notify.warning("Sorry, there are no images matching your search query. Please try again.", notifyInit);
+        // }
+      
         if (images.length < 1) {
             Notify.warning("Sorry, there are no images matching your search query. Please try again.", notifyInit);
           searchForm.reset(); //*
@@ -131,7 +142,7 @@ function createMarkup(data) {
         comments,
         downloads
             }) => `
-      <div class="photo-card gallery__item">
+      <div class="photo-card">
             <button type="button" class="like-button button" >
               <svg  
                 class="like-icon" 
