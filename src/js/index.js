@@ -71,7 +71,8 @@ function handlerSearchForm(evt) {
 async function searchPhotos() {
 
     try {
-        Loading.circle(notifyLoadInit);
+      Loading.circle(notifyLoadInit);
+      PixaBayAPIInstance.resetPage();
         const response = await PixaBayAPIInstance.fetchImages();
         console.log("API Response:", response.data);
         const images = response.data.hits;
